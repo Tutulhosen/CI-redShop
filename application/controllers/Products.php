@@ -43,8 +43,8 @@ class Products extends CI_Controller {
         $data['title'] = $title;
         $data['menu'] = 'home';
         $data['category'] = $this->products_model->getAllCategory();
-        
-
+       
+  
         $data['result'] = $details = $this->products_model->getProductDetails($slug);
 
         if (empty($details)) {
@@ -57,18 +57,24 @@ class Products extends CI_Controller {
         $data['productImage'] = $this->products_model->getProductImage($product_id);
         $data['all_category'] = $this->products_model->getAllCategory();
         $data['related'] = $this->products_model->getRelatedProducts($limit = 8, $order_by = 'id', $product_type, $product_id);
-
-//            echo '<pre>';
-//            print_r($data['details']);
-//            print_r($data['related']);
-//            echo '</pre>';
-//            exit();
+        //    echo '<pre>';
+        //    print_r($data['details']);
+        //    print_r($data['related']);
+        //    echo '</pre>';
+        //    exit();
         $data['header'] = $this->load->view('common/header', $data, TRUE);
         $data['menu'] = $this->load->view('common/top-menu', $data, TRUE);
         $data['left_category'] = $this->load->view('common/left-category', $data,TRUE);
         $data['left_mob_category'] = $this->load->view('common/left-mob-category', $data,TRUE);
         $data['cart_aside'] = $this->load->view('common/cart-aside', $data, TRUE);
         $data['footer'] = $this->load->view('common/footer', $data, TRUE);
+       
+        // select * FROM products WHERE category_id IN (SELECT category_id FROM products WHERE id =306);
+         $data['product_category'] =  $this->products_model->getRelatedProductsCategory($product_id);
+        
+        $data['product_url']=base_url().'products/details/'.$slug;
+        $data['product_rating']=$this->products_model->getRelatedProductRating($product_id);
+        
         $this->load->view('frontend/product/product-details', $data);
     }
 

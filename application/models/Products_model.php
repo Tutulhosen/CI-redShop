@@ -127,4 +127,24 @@ class Products_model extends CI_Model {
         return $query->result_array();
     }
 
+    /** Get Related Products */
+    public function getRelatedProductsCategory($product_id)
+    {
+        // $SQL="select * FROM products WHERE category_id IN (SELECT category_id FROM products WHERE id = $product_id); ";
+        // $query = $this->db->query($SQL);
+        // return $query->result_array();
+
+        return $this->db
+                ->select('category_id')
+                ->where('status',1)
+                ->where('id',$product_id)
+                ->get('products')
+                ->result();
+    }
+    public function getRelatedProductRating($product_id)
+    {
+         $SQL="SELECT (SUM(qty)/count(id)) * 100 as rating from delivery_item where product_id = $product_id";
+         
+         return (int)$this->db->query($SQL)->row()->rating;
+    }
 }

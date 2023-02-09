@@ -1,15 +1,4 @@
-<div class="char_box">
-    <div class="row">
-        <div class="col-md-10"></div>
-        <div class="col-md-2">
-           <a href="javascript:void(0)">
-           <div style="height:50px; width:150px; background-color:red; border-radius:%" class="chat">
-                <p style="color:white; text-align:center; padding-top:12px">Live Chat</p>
-           </div>
-           </a>
-        </div>
-    </div>
-</div>
+
 <footer class="footer">
 
     <div class="footer-blocks">

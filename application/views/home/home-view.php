@@ -107,7 +107,7 @@ if (isset($cart_aside)) {
                         </div><!-- product -->
                         <?php } ?>
                         </div>
-                    </div>
+            </div>
              
 
 
