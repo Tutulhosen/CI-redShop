@@ -13,6 +13,17 @@ if (isset($menu)) {
     .error p {
         color: red;
     }
+    .best_cnt{
+        height: 25px;
+        width: 70px;
+        color: white;
+        background-color: red;
+        text-align: center;
+        font-size: 10px;
+        border-radius: 40%;
+        padding-top: 5px;
+    }
+
 </style>
 
 <?php
@@ -76,11 +87,15 @@ if (isset($cart_aside)) {
                                     ?>
                         <div class="product">
                             <a class="has-shadow" href="<?php echo base_url(); ?>products/details/<?php echo $prod['slug']; ?>">
-                                <figure>
+                                <figure id="thmnl">
                                     <img class="lazyload"
-                                        data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>"
-                                        alt="">
+                                    data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>"
+                                    alt="">
                                 </figure>
+                                <div class="best_cnt">
+                                    Best Selling
+                                </div>
+                                
                                 <div class="content">
                                     <div class="price">
                                         <div class="top u-flex u-flex--content-center u-flex--item-center">
