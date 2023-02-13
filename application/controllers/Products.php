@@ -59,9 +59,15 @@ class Products extends CI_Controller {
         $data['related'] = $this->products_model->getRelatedProducts($limit = 8, $order_by = 'id', $product_type, $product_id);
         $best_selling_products = $this->products_model->getAllBestSellingProducts();
         
-        foreach($best_selling_products as $key=>$best){
-           $data['best_product_id']=$best['id'];   
+        $best_selling_product_ids=[];
+        
+        foreach($this->products_model->best_selling_product_ids()  as $value)
+        {
+            array_push($best_selling_product_ids,$value['id']);
         }
+
+        $data['best_selling_product_ids'] = $best_selling_product_ids;
+        
         
         
         //    echo '<pre>';

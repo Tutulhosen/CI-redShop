@@ -317,27 +317,40 @@ $i++;
                                                 </figure>
 
                                                 <!-- product parcentange  -->
-                                                <?php 
+                                                <?php
+                                   if(in_array($prod->id,$best_selling_product_ids))
+                                   {
+                                      ?>
+                                     <div class="best_cnt">
+                                       Best Selling
+                                    </div>
+                                      <?php
+                                   }
+                                ?>
+                                    <?php 
                                 
-                                                    if(!empty($prod->discount))
-                                                    {
-                                                        ?>
-                                                            <div class="offer">
-                                                                <?php
-                                                                    
-                                                                    if(!empty($prod->discount))
-                                                                    {
-                                                                        
-                                                                    echo $percentage=($prod->price - $prod->discount)/100 . '%' . '<br>' . 'off';
-                                                                    }
-                                                                    
-                                                                ?>
-                                                            </div>
-                                                            
-                                                        <?php
-                                                    }
+                                if(!empty($prod->discount) && is_numeric((int)$prod->price ) && is_numeric((int)$prod->discount))
+                                {
+                                    ?>
+                                        <div class="offer">
+                                            <?php
                                                 
-                                                ?>
+                                                if(!empty($prod->discount) && is_numeric((int)$prod->price ) && is_numeric((int)$prod->discount))
+                                                {
+                                                    
+                                                    $percentage=(((int)$prod->price - (int)$prod->discount)/(int)$prod->price)*100;
+                                                    if(is_numeric($percentage)){
+                                                        echo (int)$percentage. '%' . '<br>' . 'off';
+                                                    }
+                                                }
+                                                
+                                            ?>
+                                        </div>
+                                        
+                                   <?php
+                                }
+                                
+                                ?> 
                                                 
                                                 <?php
                                                 
