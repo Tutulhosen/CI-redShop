@@ -133,23 +133,25 @@ if (isset($cart_aside)) {
                                 </div>
                                 <?php
                                 
-                                if(!empty($prod['discount']))
+                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
                                 {
                                     ?>
                                         <div class="offer">
-                                   <?php
-                                    if(!empty($prod['discount']))
-                                    {
+                                            <?php
+                                                
+                                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
+                                                {
+                                                    
+                                                    $percentage=(($prod['price'] - $prod['discount'])/$prod['price'] )*100;
+                                                    if(is_numeric($percentage)){
+                                                        echo (int)$percentage. '%' . '<br>' . 'off';
+                                                    }
+                                                }
+                                                
+                                            ?>
+                                        </div>
                                         
-                                        $percentage=($prod['price']-$prod['discount']) / 100;
-                                    }
-                                    
-                                    
-                                    ?>
-                                    
-                                    <?php echo $percentage .'%'.'<br>'.'off'  ?> 
-                                </div>
-                                    <?php
+                                   <?php
                                 }
                                 
                                 ?>
@@ -207,23 +209,25 @@ if (isset($cart_aside)) {
 
                                 <?php
                                 
-                                if(!empty($prod['discount']))
+                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
                                 {
                                     ?>
                                         <div class="offer">
-                                        <?php
-                                            if(!empty($prod['discount']))
-                                            {
+                                            <?php
                                                 
-                                                $percentage=($prod['price']-$prod['discount']) / 100;
-                                            }
-                                            
-                                            
+                                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
+                                                {
+                                                    
+                                                    $percentage=(($prod['price'] - $prod['discount'])/$prod['price'] )*100;
+                                                    if(is_numeric($percentage)){
+                                                        echo (int)$percentage. '%' . '<br>' . 'off';
+                                                    }
+                                                }
+                                                
                                             ?>
-                                            
-                                            <?php echo $percentage  ?> %<br> off
                                         </div>
-                                    <?php
+                                        
+                                   <?php
                                 }
                                 
                                 ?>
@@ -285,19 +289,24 @@ if (isset($cart_aside)) {
                                         data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>"
                                         alt="">
                                 </figure>
-
-                                <?php 
+                                <div class="best_cnt">
+                                    Best Selling
+                                </div>
+                                 <?php 
                                 
-                                if(!empty($prod->discount))
+                                if(!empty($prod->discount) && is_numeric($prod->price ) && is_numeric($prod->discount))
                                 {
                                     ?>
                                         <div class="offer">
                                             <?php
                                                 
-                                                if(!empty($prod->discount))
+                                                if(!empty($prod->discount) && is_numeric($prod->price ) && is_numeric($prod->discount))
                                                 {
                                                     
-                                                   echo $percentage=($prod->price - $prod->discount)/100 . '%' . '<br>' . 'off';
+                                                    $percentage=(($prod->price - $prod->discount)/$prod->price)*100;
+                                                    if(is_numeric($percentage)){
+                                                        echo (int)$percentage. '%' . '<br>' . 'off';
+                                                    }
                                                 }
                                                 
                                             ?>
@@ -306,7 +315,7 @@ if (isset($cart_aside)) {
                                    <?php
                                 }
                                 
-                                ?>
+                                ?> 
                                 
                                 
                                 <div class="content">
