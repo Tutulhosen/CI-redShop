@@ -127,6 +127,24 @@ class Products_model extends CI_Model {
         return $query->result_array();
     }
 
+    // new arrivel product 
+    public function getNewArrivelProducts()
+    {
+        $SQL="SELECT * from products
+        where created_at>now() - interval 16 month limit 8";
+
+        $query = $this->db->query($SQL);
+        return $query->result_array();
+    }
+
+    public function getAllNewArrivelProducts()
+    {
+        $SQL="SELECT * from products
+        where created_at>now() - interval 16 month";
+        $query = $this->db->query($SQL);
+        return $query->result_array();
+    }
+
     /** Get Related Products */
     public function getRelatedProductsCategory($product_id)
     {

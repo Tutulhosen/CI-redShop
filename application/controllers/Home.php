@@ -27,7 +27,9 @@ class Home extends CI_Controller {
         $data['slider']= $this->db->select('*')->get('home_slider')->result();
         $data['result'] = $this->products_model->getProductsByCategoryWise($category,$order_by='id',$limit=8);
         $data['best_selling_products'] = $this->products_model->getBestSellingProducts();
-       // var_dump($this->products_model->getBestSellingProducts());
+        $data['new_arrivel'] = $this->products_model->getNewArrivelProducts();
+
+    //    var_dump($data['best_selling_products']);
 
         $data['header'] = $this->load->view('common/header', $data, TRUE);
         $data['menu'] = $this->load->view('common/top-menu', $data, TRUE);

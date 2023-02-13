@@ -57,8 +57,14 @@ class Products extends CI_Controller {
         $data['productImage'] = $this->products_model->getProductImage($product_id);
         $data['all_category'] = $this->products_model->getAllCategory();
         $data['related'] = $this->products_model->getRelatedProducts($limit = 8, $order_by = 'id', $product_type, $product_id);
+        $best_selling_products = $this->products_model->getAllBestSellingProducts();
+        
+        foreach($best_selling_products as $key=>$best){
+           $data['best_product_id']=$best['id'];   
+        }
+        
+        
         //    echo '<pre>';
-        //    print_r($data['details']);
         //    print_r($data['related']);
         //    echo '</pre>';
         //    exit();
@@ -156,6 +162,8 @@ class Products extends CI_Controller {
             $this->load->view('frontend/product/not-found', $data);
         }
     }
+
+    // best selling product 
     public function bestSelling() {
         
         $data = array();
@@ -177,6 +185,34 @@ class Products extends CI_Controller {
 
         if (!empty($details)) {
             $this->load->view('frontend/product/product-bestselling', $data);
+        } else {
+            $this->load->view('frontend/product/not-found', $data);
+        }
+    }
+
+    // new arrival products 
+    public function newArrivelProduct() {
+        
+        $data = array();
+        $title = 'Category';
+        $data['title'] = $title;
+        $data['menu'] = 'home';
+        $data['category'] = $this->products_model->getAllCategory();
+        $data['catInfo'] = $this->db->select('*')->where('id',13)->get('category')->row();
+        $data['catBanner']  = $this->db->select('*')->where('category_id', 13)->order_by('id','desc')->get('category_banner')->row();
+
+        $data['result'] = $details = $this->products_model->getAllNewArrivelProducts();
+
+        
+        $data['header'] = $this->load->view('common/header', $data, TRUE);
+        $data['menu'] = $this->load->view('common/top-menu', $data, TRUE);
+        $data['left_category'] = $this->load->view('common/left-category', $data,TRUE);
+        $data['left_mob_category'] = $this->load->view('common/left-mob-category', $data,TRUE);
+        $data['cart_aside'] = $this->load->view('common/cart-aside', $data, TRUE);
+        $data['footer'] = $this->load->view('common/footer', $data, TRUE);
+
+        if (!empty($details)) {
+            $this->load->view('frontend/product/product-newArrivel', $data);
         } else {
             $this->load->view('frontend/product/not-found', $data);
         }

@@ -19,16 +19,53 @@ if (isset($menu)) {
         color:red;
     }
     .button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .best_cnt{
+        height: 25px;
+        width: 70px;
+        color: white;
+        background-color: red;
+        text-align: center;
+        font-size: 10px;
+        border-radius: 40%;
+        padding-top: 5px;
+    }
+    .new_cnt{
+        height: 25px;
+        width: 70px;
+        color: white;
+        background-color: blue;
+        text-align: center;
+        font-size: 10px;
+        border-radius: 40%;
+        padding-top: 5px;
+    }
+    .offer{
+        height: 45px;
+        width: 45px;
+        color: white;
+        background-color: #1c361f;
+        font-weight: bold;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 50%;
+        padding-top: 5px;
+        position: absolute;
+        right: 7px;
+        bottom: 86px;
+    }
+    .product{
+        position: relative;
+    }
 </style>
 
 <?php
@@ -105,13 +142,13 @@ $i++;
                                         <?php if ($result->discount != '' || $result->discount != null) {?>
                                             <div class="save">
                                                 Save <?php
-$discount = $result->discount;
-    if ($discount == '' || $discount == null) {
-        $discount = 0;
-    }
+                                            $discount = $result->discount;
+                                                if ($discount == '' || $discount == null) {
+                                                    $discount = 0;
+                                                }
 
-    $save = $result->price - $discount;
-    echo $result->currency . '' . $save;
+                                                $save = $result->price - $discount;
+                                                echo $result->currency . '' . $save;
     ?>
                                             </div>
                                         <?php }?>
@@ -145,12 +182,12 @@ $discount = $result->discount;
                                 <?php }?>
 
                                 <?php
-if ($result->discount == '' || $result->discount == null) {
-    $finalPrice = $result->price;
-} else {
-    $finalPrice = $result->discount;
-}
-?>
+                                    if ($result->discount == '' || $result->discount == null) {
+                                        $finalPrice = $result->price;
+                                    } else {
+                                        $finalPrice = $result->discount;
+                                    }
+                                    ?>
 
                                 <div class="product-act">
                                     <input type="hidden" name="qty" value="1">
@@ -164,7 +201,7 @@ if ($result->discount == '' || $result->discount == null) {
                                         <input type="submit" class="act-det cart clickButton" name="addtocart" value="Add to cart">
                                         <input type="submit" style="margin-left:-2px" class="act-det buy clickButton" name="buyNow" value="Buy now">
                                     <?php }?>
-<!--                                    <a style="margin-left:-2px" href="<?php // echo base_url();  ?>products/cart_details" class="act-det buy">Buy now</a>
+                            <!--                                    <a style="margin-left:-2px" href="<?php // echo base_url();  ?>products/cart_details" class="act-det buy">Buy now</a>
                                 <a style="margin-left:-2px" href="<?php // echo base_url();  ?>products/cart_details" class="act-det buy">Buy now</a>-->
                                 </div>
                                 <!--                                <div class="product-meta">
@@ -245,14 +282,15 @@ if ($result->discount == '' || $result->discount == null) {
                     <div class="box-body">
                         <div style="padding:10px;margin: 0 auto">
                         <p>প্রোডাক্টটি কতবার sell হয়েছে , তার সাপেক্ষে rating auto তৈরি করা হয়েছে</p>
-                        <i class="fa-solid fa-star" id="st1" style="cursor: pointer;font-size:50px"></i>
-                        <i class="fa-solid fa-star" id="st2" style="cursor: pointer;font-size:50px"></i>
-                        <i class="fa-solid fa-star" id="st3" style="cursor: pointer;font-size:50px"></i>
-                        <i class="fa-solid fa-star" id="st4" style="cursor: pointer;font-size:50px"></i>
-                        <i class="fa-solid fa-star" id="st5" style="cursor: pointer;font-size:50px"></i>
+                        <i class="fa-solid fa-star" id="st1" style="cursor: pointer;font-size:40px"></i>
+                        <i class="fa-solid fa-star" id="st2" style="cursor: pointer;font-size:40px"></i>
+                        <i class="fa-solid fa-star" id="st3" style="cursor: pointer;font-size:40px"></i>
+                        <i class="fa-solid fa-star" id="st4" style="cursor: pointer;font-size:40px"></i>
+                        <i class="fa-solid fa-star" id="st5" style="cursor: pointer;font-size:40px"></i>
                         </div>
                     </div>
                 </div> <!-- offers-det -->
+
                 <div class="section section--home" style="padding-top:20px ;">
                         <div class="sec-head u-flex u-flex--content-between u-flex--item-center">
                             <h4>Related Products</h4>
@@ -261,44 +299,95 @@ if ($result->discount == '' || $result->discount == null) {
                                 class="ti-angle-right"></i></a>
                         </div>
                         <div class="products u-flex u-flex--wrap">
-                        <?php
-                                foreach ($related as $prod) {
-                                    $prodImgSingle = $this->db->select('*')->where('product_id', $prod->id)->get('product_img')->row();
-                                    ?>
-                        <div class="product">
-                            <a class="has-shadow" href="<?php echo base_url(); ?>products/details/<?php echo $prod->slug; ?>">
-                                <figure>
-                                    <img class="lazyload"
-                                        data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImgSingle->img_name; ?>"
-                                        alt="">
-                                </figure>
-                                <div class="content">
-                                    <div class="price">
-                                        <div class="top u-flex u-flex--content-center u-flex--item-center">
-                                            <?php if ($prod->discount != '') { ?>
-                                            <div class="old"><?php echo $prod->currency . '' . $prod->price . ' '; ?></div>
-                                            <?php } ?> &nbsp;
-                                            <div class="new">
-                                                <?php if ($prod->discount == '') { ?>
-                                                <?php echo $prod->currency . '' . $prod->price . ' '; ?>
-                                                <?php } else { ?>
-                                                <?php echo $prod->currency . '' . $prod->discount . ' '; ?>
-                                                <?php } ?>
-                                            </div>
-                                            <?php if ($prod->availability_status == 'stock_out') { ?>
-                                            <div class="btn-set" style="margin-left:5px">
-                                                <button class="btn btn-danger"> Stock Out</button>
-                                            </div>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                    <h5><?php echo $prod->name; ?></h5>
-                                </div>
-                            </a>
-                        </div><!-- product -->
-                        <?php } ?>
+                                <?php
+                                    foreach ($related as $prod) {
+                                        $prodImgSingle = $this->db->select('*')->where('product_id', $prod->id)->get('product_img')->row();
+                                ?>
+
+                                <?php
+                                    if($prod->slug !=$result->slug)
+                                    {
+                                        ?>
+                                            <div class="product">
+                                            <a class="has-shadow" href="<?php echo base_url(); ?>products/details/<?php echo $prod->slug; ?>">
+                                                <figure>
+                                                    <img class="lazyload"
+                                                        data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImgSingle->img_name; ?>"
+                                                        alt="">
+                                                </figure>
+
+                                                <!-- product parcentange  -->
+                                                <?php 
+                                
+                                                    if(!empty($prod->discount))
+                                                    {
+                                                        ?>
+                                                            <div class="offer">
+                                                                <?php
+                                                                    
+                                                                    if(!empty($prod->discount))
+                                                                    {
+                                                                        
+                                                                    echo $percentage=($prod->price - $prod->discount)/100 . '%' . '<br>' . 'off';
+                                                                    }
+                                                                    
+                                                                ?>
+                                                            </div>
+                                                            
+                                                        <?php
+                                                    }
+                                                
+                                                ?>
+                                                
+                                                <?php
+                                                
+                                                
+                                                // if (in_array($prod['id'], $best_product_id)) {
+                                                //     echo "okay";
+                                                // }else{
+                                                //     echo "folse";
+                                                // }
+                                                
+                                                ?>
+                                                
+                                                <!-- <div class="new_cnt">
+                                                    new Launch
+                                                </div> -->
+
+                                                <!-- <div class="best_cnt">
+                                                    Best Selling
+                                                </div> -->
+                                                <div class="content">
+                                                    <div class="price">
+                                                        <div class="top u-flex u-flex--content-center u-flex--item-center">
+                                                            <?php if ($prod->discount != '') { ?>
+                                                            <div class="old"><?php echo $prod->currency . '' . $prod->price . ' '; ?></div>
+                                                            <?php } ?> &nbsp;
+                                                            <div class="new">
+                                                                <?php if ($prod->discount == '') { ?>
+                                                                <?php echo $prod->currency . '' . $prod->price . ' '; ?>
+                                                                <?php } else { ?>
+                                                                <?php echo $prod->currency . '' . $prod->discount . ' '; ?>
+                                                                <?php } ?>
+                                                            </div>
+                                                            <?php if ($prod->availability_status == 'stock_out') { ?>
+                                                            <div class="btn-set" style="margin-left:5px">
+                                                                <button class="btn btn-danger"> Stock Out</button>
+                                                            </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <h5><?php echo $prod->name; ?></h5>
+                                                </div>
+                                            </a>
+                                        </div><!-- product -->
+                                        <?php
+                                    }
+                                ?>
+                                        
+                            <?php } ?>
                         </div>
-            </div>
+                </div>
             </div>
         </div>
     </div>
@@ -346,24 +435,24 @@ if ($result->discount == '' || $result->discount == null) {
   alert("Copied the Link: " + copyText.value);
 }
       $(document).ready(function() {
-        <?php 
-        if($product_rating > 0 && $product_rating <= 50)    
-           {
-               ?>$('#st1,#st2').css("color", " #FFCC00");<?php
-           }
-        elseif($product_rating > 50 && $product_rating <= 100)
-        {
-            ?>$('#st1,#st2,#st3').css("color", " #FFCC00");<?php
-        }
-        elseif($product_rating > 100 && $product_rating < 150)
-        {
-            ?>$('#st1,#st2,#st3,#st4').css("color", " #FFCC00");<?php
-        }
-        else
-        {
-            ?>$('#st1,#st2,#st3,#st4,#st5').css("color", " #FFCC00");<?php
-        } 
-        ?>  
+            <?php 
+            if($product_rating > 0 && $product_rating <= 50)
+            {
+                ?>$('#st1,#st2').css("color", " #FFCC00");<?php
+            }
+            elseif($product_rating > 50 && $product_rating <= 100)
+            {
+                ?>$('#st1,#st2,#st3').css("color", " #FFCC00");<?php
+            }
+            elseif($product_rating > 100 && $product_rating < 150)
+            {
+                ?>$('#st1,#st2,#st3,#st4').css("color", " #FFCC00");<?php
+            }
+            else
+            {
+                ?>$('#st1,#st2,#st3,#st4,#st5').css("color", " #FFCC00");<?php
+            } 
+            ?>  
       })
 
 </script>
