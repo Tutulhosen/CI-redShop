@@ -112,6 +112,7 @@ if (isset($cart_aside)) {
                         </div>
                         <div class="products u-flex u-flex--wrap">
                                     <?php
+                                    $increment=0;
                                 foreach ($new_arrivel as $prod) {
 
                                     $prodImg = $this->db->select('*')->where('product_id', $prod['id'])->get('product_img')->row();
@@ -133,16 +134,16 @@ if (isset($cart_aside)) {
                                 </div>
                                 <?php
                                 
-                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
+                                if(!empty($prod['discount']) && is_numeric((int)$prod['price'] ) && is_numeric((int)$prod['discount']))
                                 {
                                     ?>
                                         <div class="offer">
                                             <?php
                                                 
-                                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
+                                                if(!empty($prod['discount']) && is_numeric((int)$prod['price'] ) && is_numeric((int)$prod['discount']))
                                                 {
                                                     
-                                                    $percentage=(($prod['price'] - $prod['discount'])/$prod['price'] )*100;
+                                                    $percentage=(((int)$prod['price']  - (int)$prod['discount'])/(int)$prod['price'] )*100;
                                                     if(is_numeric($percentage)){
                                                         echo (int)$percentage. '%' . '<br>' . 'off';
                                                     }
@@ -179,7 +180,13 @@ if (isset($cart_aside)) {
                                 </div>
                             </a>
                         </div><!-- product -->
-                        <?php } ?>
+                        <?php 
+                        if($increment > 6)
+                        {
+                            break;
+                        }
+                        $increment++;
+                       } ?>
                         </div>
             </div>
 
@@ -193,6 +200,7 @@ if (isset($cart_aside)) {
                         </div>
                         <div class="products u-flex u-flex--wrap">
                         <?php
+                        $increment=0;
                                 foreach ($best_selling_products as $prod) {
                                     $prodImg = $this->db->select('*')->where('product_id', $prod['id'])->get('product_img')->row();
                                     ?>
@@ -209,16 +217,16 @@ if (isset($cart_aside)) {
 
                                 <?php
                                 
-                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
+                                if(!empty($prod['discount']) && is_numeric((int)$prod['price'] ) && is_numeric((int)$prod['discount']))
                                 {
                                     ?>
                                         <div class="offer">
                                             <?php
                                                 
-                                                if(!empty($prod['discount']) && is_numeric($prod['price'] ) && is_numeric($prod['discount']))
+                                                if(!empty($prod['discount']) && is_numeric((int)$prod['price'] ) && is_numeric((int)$prod['discount']))
                                                 {
                                                     
-                                                    $percentage=(($prod['price'] - $prod['discount'])/$prod['price'] )*100;
+                                                    $percentage=(((int)$prod['price']  - (int)$prod['discount'])/(int)$prod['price'] )*100;
                                                     if(is_numeric($percentage)){
                                                         echo (int)$percentage. '%' . '<br>' . 'off';
                                                     }
@@ -258,7 +266,13 @@ if (isset($cart_aside)) {
                                 </div>
                             </a>
                         </div><!-- product -->
-                        <?php } ?>
+                        <?php 
+                          if($increment > 6)
+                          {
+                              break;
+                          }
+                          $increment++;
+                    } ?>
                         </div>
             </div>
 
@@ -289,21 +303,30 @@ if (isset($cart_aside)) {
                                         data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>"
                                         alt="">
                                 </figure>
-                                <div class="best_cnt">
-                                    Best Selling
-                                </div>
+                                <?php
+                                   if(in_array($prod->id,$best_selling_product_ids))
+                                   {
+                                      ?>
+                                     <div class="best_cnt">
+                                       Best Selling
+                                    </div>
+                                      <?php
+                                   }
+                                ?>
+                             
+
                                  <?php 
                                 
-                                if(!empty($prod->discount) && is_numeric($prod->price ) && is_numeric($prod->discount))
+                                if(!empty($prod->discount) && is_numeric((int)$prod->price ) && is_numeric((int)$prod->discount))
                                 {
                                     ?>
                                         <div class="offer">
                                             <?php
                                                 
-                                                if(!empty($prod->discount) && is_numeric($prod->price ) && is_numeric($prod->discount))
+                                                if(!empty($prod->discount) && is_numeric((int)$prod->price ) && is_numeric((int)$prod->discount))
                                                 {
                                                     
-                                                    $percentage=(($prod->price - $prod->discount)/$prod->price)*100;
+                                                    $percentage=(((int)$prod->price - (int)$prod->discount)/(int)$prod->price)*100;
                                                     if(is_numeric($percentage)){
                                                         echo (int)$percentage. '%' . '<br>' . 'off';
                                                     }

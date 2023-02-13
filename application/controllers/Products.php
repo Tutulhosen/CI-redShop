@@ -148,7 +148,15 @@ class Products extends CI_Controller {
         $data['catBanner']  = $this->db->select('*')->where('category_id', $categoryId)->order_by('id','desc')->get('category_banner')->row();
 
         $data['result'] = $details = $this->products_model->getAllProductsByCategoryWise($categoryId);
+        $best_selling_product_ids=[];
+        
+        foreach($this->products_model->best_selling_product_ids()  as $value)
+        {
+            array_push($best_selling_product_ids,$value['id']);
+        }
 
+        $data['best_selling_product_ids'] = $best_selling_product_ids;
+         
         $data['header'] = $this->load->view('common/header', $data, TRUE);
         $data['menu'] = $this->load->view('common/top-menu', $data, TRUE);
         $data['left_category'] = $this->load->view('common/left-category', $data,TRUE);

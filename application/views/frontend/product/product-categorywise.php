@@ -13,6 +13,33 @@ if (isset($menu)) {
     .error p{
         color:red;
     }
+    .best_cnt{
+        height: 25px;
+        width: 70px;
+        color: white;
+        background-color: red;
+        text-align: center;
+        font-size: 10px;
+        border-radius: 40%;
+        padding-top: 5px;
+    }
+    .offer{
+        height: 45px;
+        width: 45px;
+        color: white;
+        background-color: #1c361f;
+        font-weight: bold;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 50%;
+        padding-top: 5px;
+        position: absolute;
+        right: 7px;
+        bottom: 86px;
+    }
+    .product{
+        position: relative;
+    }
 </style>
 
 <?php
@@ -79,6 +106,42 @@ if (isset($cart_aside)) {
                                     <figure>
                                         <img class="lazyload" data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>" alt="">
                                     </figure>
+                                    <?php
+                                   if(in_array($prod->id,$best_selling_product_ids))
+                                   {
+                                      ?>
+                                     <div class="best_cnt">
+                                       Best Selling
+                                    </div>
+                                      <?php
+                                   }
+                                ?>
+                                    <?php 
+                                
+                                if(!empty($prod->discount) && is_numeric((int)$prod->price ) && is_numeric((int)$prod->discount))
+                                {
+                                    ?>
+                                        <div class="offer">
+                                            <?php
+                                                
+                                                if(!empty($prod->discount) && is_numeric((int)$prod->price ) && is_numeric((int)$prod->discount))
+                                                {
+                                                    
+                                                    $percentage=(((int)$prod->price - (int)$prod->discount)/(int)$prod->price)*100;
+                                                    if(is_numeric($percentage)){
+                                                        echo (int)$percentage. '%' . '<br>' . 'off';
+                                                    }
+                                                }
+                                                
+                                            ?>
+                                        </div>
+                                        
+                                   <?php
+                                }
+                                
+                                ?> 
+
+
                                     <div class="content">
                                         <h5><?php echo $prod->name; ?></h5>
                                         <div class="price">

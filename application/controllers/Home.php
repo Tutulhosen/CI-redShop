@@ -26,11 +26,16 @@ class Home extends CI_Controller {
         $data['category']= $category = $this->products_model->getAllCategory();
         $data['slider']= $this->db->select('*')->get('home_slider')->result();
         $data['result'] = $this->products_model->getProductsByCategoryWise($category,$order_by='id',$limit=8);
-        $data['best_selling_products'] = $this->products_model->getBestSellingProducts();
-        $data['new_arrivel'] = $this->products_model->getNewArrivelProducts();
-
-    //    var_dump($data['best_selling_products']);
-
+        $data['best_selling_products'] = $this->products_model->getAllBestSellingProducts();
+        $data['new_arrivel'] = $this->products_model->getAllNewArrivelProducts();
+         
+        $best_selling_product_ids=[];
+        foreach($data['best_selling_products']  as $value)
+        {
+            array_push($best_selling_product_ids,$value['id']);
+        }
+       
+        $data['best_selling_product_ids'] = $best_selling_product_ids;
         $data['header'] = $this->load->view('common/header', $data, TRUE);
         $data['menu'] = $this->load->view('common/top-menu', $data, TRUE);
         $data['left_category'] = $this->load->view('common/left-category', $data, TRUE);

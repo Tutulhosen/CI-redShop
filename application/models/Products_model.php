@@ -127,6 +127,13 @@ class Products_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function best_selling_product_ids()
+    {
+        $SQL="SELECT products.id from products where id IN (SELECT products.id FROM products inner join delivery_item on products.id = delivery_item.product_id GROUP BY delivery_item.product_id HAVING count(delivery_item.product_id) >10 and products.status =1) ";
+        $query = $this->db->query($SQL);
+        return $query->result_array();
+    }
+
     // new arrivel product 
     public function getNewArrivelProducts()
     {
