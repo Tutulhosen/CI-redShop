@@ -238,7 +238,7 @@ $i++;
                     </div> <!-- offers-det -->
                 </form>
 
-                <div class="offers-det has-shadow det-box u-m-t-20">
+                <div class="offers-det has-shadow det-box u-m-t-20" style="display:none">
                     <div class="title">
                         Offers
                     </div>
