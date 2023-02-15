@@ -13,16 +13,17 @@ if (isset($menu)) {
 ?>
 
 <style>
-    .error p{
-        color:red;
+    .error p {
+        color: red;
     }
 </style>
 <style>
-    .error p{
-        color:red;
+    .error p {
+        color: red;
     }
-    .mendatory{
-        color:red;
+
+    .mendatory {
+        color: red;
     }
 </style>
 
@@ -39,22 +40,22 @@ if (isset($address->delivery_charge)) {
         <div class="row10 u-flex">
             <div class="step-left">
                 <div class="step-box <?php
-                if ($this->session->userdata('user_id')) {
-                    echo "complete";
-                }
-                ?> has-shadow active">
-                    <div class="title u-flex u-flex--item-center">                      
+                                        if ($this->session->userdata('user_id')) {
+                                            echo "complete";
+                                        }
+                                        ?> has-shadow active">
+                    <div class="title u-flex u-flex--item-center">
                         <p>
                             <b>যেভাবে আপনি পন্য কিনবেনঃ</b><br>
                             ১। আপনি যদি আমাদের নতুন অতিথি হয়ে থাকেন তাহলে যেকোন পণ্য কিনতে এখনই Sing up (সাইন-আপ/রেজিস্ট্রেশন করুন)। আপনার নাম্বারটি সঠিক কিনা যাচাই কারার জন্য একটি কোড যাবে, সেটি দিন। <br>
-                        </p>                        
+                        </p>
                     </div>
-                    <div class="title u-flex u-flex--item-center">
+                    <div class="title u-flex u-flex--item-center" style="display:none">
                         <p>
                             <b>Offer</b><br>
-                            Bkash Payment করলে ১০%  থেকে ৩০% পর্যন্ত ছাড়।  পেমেন্ট নাম্বার- <b>01872737759</b>. <br>
-                            Nagad payment করলে ১০%  থেকে ৪০% পর্যন্ত ছাড়।  <br>
-                            Rocket Payment- করলে ৫%  থেকে ১৫% পর্যন্ত ছাড়।  পেমেন্ট নাম্বার- <b>01872737757</b>. <br>
+                            Bkash Payment করলে ১০% থেকে ৩০% পর্যন্ত ছাড়। পেমেন্ট নাম্বার- <b>01872737759</b>. <br>
+                            Nagad payment করলে ১০% থেকে ৪০% পর্যন্ত ছাড়। <br>
+                            Rocket Payment- করলে ৫% থেকে ১৫% পর্যন্ত ছাড়। পেমেন্ট নাম্বার- <b>01872737757</b>. <br>
                         </p>
                     </div>
                     <div class="title u-flex u-flex--item-center">
@@ -64,11 +65,11 @@ if (isset($address->delivery_charge)) {
                     </div>
                     <div class="step-body">
                         <div class="fb-verify u-flex">
-                        <?php if ($this->session->userdata('user_id')) { ?>
+                            <?php if ($this->session->userdata('user_id')) { ?>
 
                                 <p>Name: <?php echo $this->session->userdata('first_name'); ?> </p>
                                 &nbsp; &nbsp; &nbsp; <p>Mobile: <?php echo $this->session->userdata('mobile'); ?> </p>
-                        <?php } else { ?>
+                            <?php } else { ?>
                                 <div class="fb-content">
                                     <div class="login__fb">
                                         <a id="openFb" href="#">Sign in or sign up with phone number</a>
@@ -87,17 +88,17 @@ if (isset($address->delivery_charge)) {
                                         <!--<a href="#">Sign in or sign up with Facebook</a>-->
                                     </form>
                                 </div>
-<?php } ?>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
 
 
                 <div class="step-box <?php
-if ($this->session->userdata('invoice_number')) {
-    echo "complete";
-}
-?> has-shadow u-m-t-15 u-m-b-15 active">
+                                        if ($this->session->userdata('invoice_number')) {
+                                            echo "complete";
+                                        }
+                                        ?> has-shadow u-m-t-15 u-m-b-15 active">
 
                     <div class="title u-flex u-flex--item-center">
                         <div class="ctrl-coll">+</div>
@@ -108,7 +109,7 @@ if ($this->session->userdata('invoice_number')) {
 
                     </div>
 
-<?php if ($this->session->userdata('user_id')) { ?>
+                    <?php if ($this->session->userdata('user_id')) { ?>
 
                         <div class="step-body">
 
@@ -125,10 +126,10 @@ if ($this->session->userdata('invoice_number')) {
                                         <input type="hidden" class="form-control" name="id" value="<?php echo $result->id; ?>">
 
                                         <input type="hidden" class="form-control" name="invoice_number" value="<?php
-                                           if (isset($address->invoice_number)) {
-                                               echo $address->invoice_number;
-                                           };
-                                           ?>">
+                                                                                                                if (isset($address->invoice_number)) {
+                                                                                                                    echo $address->invoice_number;
+                                                                                                                };
+                                                                                                                ?>">
 
                                     </div>
 
@@ -137,33 +138,33 @@ if ($this->session->userdata('invoice_number')) {
                                         <label for="mob">Mobile <span class="mendatory">*</span></label>
 
                                         <input type="text" class="form-control" name="mobile" value="<?php
-                                           if (isset($address->mobile)) {
-                                               echo $address->mobile;
-                                           } else {
-                                               echo $result->mobile;
-                                           }
-                                           ?>" id="mob" required="">
+                                                                                                        if (isset($address->mobile)) {
+                                                                                                            echo $address->mobile;
+                                                                                                        } else {
+                                                                                                            echo $result->mobile;
+                                                                                                        }
+                                                                                                        ?>" id="mob" required="">
 
                                     </div>
                                     <div class="form-group u-m-b-25">
                                         <label for="email">Email <span>(Optional)</span></label>
                                         <input type="email" class="form-control" name="email" value="<?php
-                                           if (isset($address->email)) {
-                                               echo $address->email;
-                                           } else {
-                                               echo $result->email;
-                                           }
-                                           ?>" id="email">
+                                                                                                        if (isset($address->email)) {
+                                                                                                            echo $address->email;
+                                                                                                        } else {
+                                                                                                            echo $result->email;
+                                                                                                        }
+                                                                                                        ?>" id="email">
 
                                     </div>
 
                                     <div class="form-group u-m-b-25">
                                         <label for="comment">Address <span class="mendatory">*</span></label>
                                         <textarea class="form-control" rows="3" name="address" id="comment" required=""> <?php
-                                           if (isset($address->address)) {
-                                               echo $address->address;
-                                           }
-                                    ?></textarea>
+                                                                                                                            if (isset($address->address)) {
+                                                                                                                                echo $address->address;
+                                                                                                                            }
+                                                                                                                            ?></textarea>
 
                                     </div>
 
@@ -172,10 +173,10 @@ if ($this->session->userdata('invoice_number')) {
                                         <label for="cit">City <span class="mendatory">*</span></label>
 
                                         <input type="text" class="form-control" name="city" value="<?php
-                                        if (isset($address->city)) {
-                                            echo $address->city;
-                                        }
-                                        ?>" id="cit" required="">
+                                                                                                    if (isset($address->city)) {
+                                                                                                        echo $address->city;
+                                                                                                    }
+                                                                                                    ?>" id="cit" required="">
 
                                     </div>
 
@@ -184,10 +185,10 @@ if ($this->session->userdata('invoice_number')) {
                                         <label for="dis">District <span class="mendatory">*</span></label>
 
                                         <input type="text" class="form-control" name="district" value="<?php
-                                                if (isset($address->district)) {
-                                                    echo $address->district;
-                                                }
-                                                ?>" id="dis" required="">
+                                                                                                        if (isset($address->district)) {
+                                                                                                            echo $address->district;
+                                                                                                        }
+                                                                                                        ?>" id="dis" required="">
 
                                     </div>
 
@@ -198,22 +199,22 @@ if ($this->session->userdata('invoice_number')) {
                                         <div class="radio">
 
                                             <label><input type="radio" name="delivery_charge" value="50" <?php
-                                            if (isset($address->delivery_charge) && $address->delivery_charge == '50') {
-                                                echo "checked";
-                                            } else {
-                                                echo "checked";
-                                            }
-                                            ?>> Inside Dhaka: ৳50</label>
+                                                                                                            if (isset($address->delivery_charge) && $address->delivery_charge == '50') {
+                                                                                                                echo "checked";
+                                                                                                            } else {
+                                                                                                                echo "checked";
+                                                                                                            }
+                                                                                                            ?>> Inside Dhaka: ৳50</label>
 
                                         </div>
 
                                         <div class="radio">
 
                                             <label><input type="radio" name="delivery_charge" value="100" <?php
-                                            if (isset($address->delivery_charge) && $address->delivery_charge == '100') {
-                                                echo "checked";
-                                            }
-                                            ?>> Outside Dhaka: ৳100</label>
+                                                                                                            if (isset($address->delivery_charge) && $address->delivery_charge == '100') {
+                                                                                                                echo "checked";
+                                                                                                            }
+                                                                                                            ?>> Outside Dhaka: ৳100</label>
 
                                         </div>
                                     </div>
@@ -223,19 +224,19 @@ if ($this->session->userdata('invoice_number')) {
                                 </form>
                             </div>
                         </div>
-                                    <?php } ?>
+                    <?php } ?>
                 </div>
                 <div class="step-box <?php
-                                    if (isset($address->delivery_charge)) {
-                                        echo "complete";
-                                    }
-                                    ?> has-shadow active">
+                                        if (isset($address->delivery_charge)) {
+                                            echo "complete";
+                                        }
+                                        ?> has-shadow active">
                     <div class="title u-flex u-flex--item-center">
                         <div class="ctrl-coll">-</div>
                         <span>3</span>
                         <h6>Payment</h6>
                     </div>
-<?php if (isset($address->delivery_charge)) { ?>
+                    <?php if (isset($address->delivery_charge)) { ?>
                         <div class="step-body" <?php if (isset($address->delivery_charge)) { ?> style="display: block;" <?php } ?>>
                             <div class="delivery-det">
                                 <form action="<?php echo base_url(); ?>checkout/proceed_to_checkout" method="post">
@@ -243,35 +244,35 @@ if ($this->session->userdata('invoice_number')) {
                                         <label><input type="checkbox" value="" checked=""> Cash on delivery</label>
 
                                         <input type="hidden" class="form-control" name="id" value="<?php
-    if (isset($address->id)) {
-        echo $address->id;
-    };
-    ?>">
+                                                                                                    if (isset($address->id)) {
+                                                                                                        echo $address->id;
+                                                                                                    };
+                                                                                                    ?>">
                                         <input type="hidden" class="form-control" name="sms_otp" value="<?php
-    if (isset($address->sms_otp)) {
-        echo $address->sms_otp;
-    };
-    ?>">
+                                                                                                        if (isset($address->sms_otp)) {
+                                                                                                            echo $address->sms_otp;
+                                                                                                        };
+                                                                                                        ?>">
                                         <input type="hidden" class="form-control" name="mobile" value="<?php
-    if (isset($address->mobile)) {
-        echo $address->mobile;
-    };
-    ?>">
+                                                                                                        if (isset($address->mobile)) {
+                                                                                                            echo $address->mobile;
+                                                                                                        };
+                                                                                                        ?>">
 
                                         <input type="hidden" class="form-control" name="invoice_number" value="<?php
-    if (isset($address->invoice_number)) {
-        echo $address->invoice_number;
-    };
-    ?>">
+                                                                                                                if (isset($address->invoice_number)) {
+                                                                                                                    echo $address->invoice_number;
+                                                                                                                };
+                                                                                                                ?>">
 
                                         <input type="hidden" class="form-control" name="delivery_charge" value="<?php
-    if (isset($address->delivery_charge)) {
-        echo $address->delivery_charge;
-    };
-    ?>">
-                                    <div class="checkbox">
-                                        <p>( ক্রয় আদেশ নিশ্চিত করার জন্য  আপনার মোবাইল নাম্বারে একটি ওয়ান টাইম পাসওয়ার্ড  (ওটিপি) পাঠানো হবে  )</p>
-                                    </div>
+                                                                                                                if (isset($address->delivery_charge)) {
+                                                                                                                    echo $address->delivery_charge;
+                                                                                                                };
+                                                                                                                ?>">
+                                        <div class="checkbox">
+                                            <p>( ক্রয় আদেশ নিশ্চিত করার জন্য আপনার মোবাইল নাম্বারে একটি ওয়ান টাইম পাসওয়ার্ড (ওটিপি) পাঠানো হবে )</p>
+                                        </div>
                                     </div>
                                     <div class="form-submit u-m-t-20 text-center">
                                         <button type="submit" class="btn btn-success">Checkout</button>
@@ -279,7 +280,7 @@ if ($this->session->userdata('invoice_number')) {
                                 </form>
                             </div>
                         </div>
-                            <?php } ?>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -291,133 +292,26 @@ if ($this->session->userdata('invoice_number')) {
                         </div>
                         <div class="items-cart">
 
-<?php $i = 1; ?>
+                            <?php $i = 1; ?>
 
-<?php
-if (!empty($this->cart->contents())) {
-    foreach ($this->cart->contents() as $items) {
-        $prodImg = $this->db->select('*')->where('product_id', $items['id'])->get('product_img')->row();
-//        echo "<pre>";
-//        print_r($prodImg);
-//        die();
-        
-        ?>
-                                    <script type="text/javascript">
-                                        $(document).ready(function () {
-                                        /* attach a submit handler to the form */
-                                        $("#item_del_<?php echo $items['rowid']; ?>").click(function (event) {
-                                            /* stop form from submitting normally */
-                                            var rowid = '<?php echo $items['rowid']; ?>';
-                                            var values = 'rowid=' + rowid;
-                                            $.ajax({
-                                                url: "<?php echo base_url() ?>cart/delect_cart_item/<?php echo $items['rowid']; ?>",
-                                                                type: "GET",
-                                                                data: values,
-                                                                cache: false,
-                                                                beforeSend: function () {
-                                                                },
-                                                                success: function (data) {
-                                                                    $("#item_div_<?php echo $items['rowid']; ?>").hide();
-                                                                    $("#cartDiv").load(location.href + " #cartDiv");
-                                                                    $("#cartTotal").load(location.href + " #cartTotal");
-                                                                    $("#grandTotal").load(location.href + " #grandTotal");
-//                                                                    $("#grandTotal").html(<?php // echo $this->cart->total() + $delivery_charge; ?>);
-                                                                    $(".cart-count").html(data);
-                                                                },
-                                                                error: function () {
-                                                                    alert('there is error while submit');
-                                                                }
+                            <?php
+                            if (!empty($this->cart->contents())) {
+                                foreach ($this->cart->contents() as $items) {
+                                    $prodImg = $this->db->select('*')->where('product_id', $items['id'])->get('product_img')->row();
+                                    //        echo "<pre>";
+                                    //        print_r($prodImg);
+                                    //        die();
 
-                                                            });
+                            ?>
 
-                                                        });
-                                                $("#itemQty_<?php echo $items['rowid']; ?>").click(function (event) {
-                                                /* stop form from submitting normally */
-                                                    alert("Oh! Something went to wrong.");
-                                                        });
-
-                                                    });
-
-                                    </script>
-                                    
-                                            <script type="text/javascript">
-                                        $(document).ready(function () {
-                                                 /* attach a submit handler to the form */
-                                                $(".ti_plus_<?php echo $items['rowid']?>").click(function (event) {
-                                                    var rowid = $("#rowid_<?php echo $items['rowid']?>").val();
-                                                    var itemQty = $("#itemQty_<?php echo $items['rowid']; ?>").val();
-                                                    var values = 'itemQty=' + itemQty;
-                                                    
-                                                    $.ajax({
-                                                url: "<?php echo base_url() ?>cart/cart_item_plus/<?php echo $items['rowid']; ?>",
-                                                                type: "GET",
-                                                                data: values,
-                                                                cache: false,
-                                                                beforeSend: function () {
-                                                                },
-                                                                success: function (data) {
-                                                                    var itemTotalQty = Number(itemQty) + 1;
-                                                                    var itemPrice = <?php echo $items['price']; ?>;
-                                                                    $(".item__price_<?php echo $items['rowid']; ?>").html(itemTotalQty + "x <span>৳ <?php echo $items['price']; ?></span>");
-                                                                    $(".price_quantity_<?php echo $items['rowid']; ?>").html("৳ " + (itemPrice * itemTotalQty));
-                                                                    $("#cartTotal").load(location.href + " #cartTotal");
-                                                                    $("#grandTotal").load(location.href + " #grandTotal");
-                                                                    $("#itemQty_<?php echo $items['rowid']; ?>").val(itemTotalQty);
-                                                                },
-                                                                error: function () {
-                                                                    alert('there is error while submit');
-                                                                }
-
-                                                            });
-                                                });
-
-                                            });
-
-                                            </script>
-                                            <script type="text/javascript">
-                                        $(document).ready(function () {
-                                                 /* attach a submit handler to the form */
-                                                $(".ti_minus_<?php echo $items['rowid']?>").click(function (event) {
-                                                    var rowid = $("#rowid_<?php echo $items['rowid']?>").val();
-                                                    var itemQty = $("#itemQty_<?php echo $items['rowid']; ?>").val();
-                                                    var values = 'itemQty=' + itemQty;
-                                                    
-                                                    $.ajax({
-                                                url: "<?php echo base_url() ?>cart/cart_item_minus/<?php echo $items['rowid']; ?>",
-                                                                type: "GET",
-                                                                data: values,
-                                                                cache: false,
-                                                                beforeSend: function () {
-                                                                },
-                                                                success: function (data) {
-                                                                    var itemTotalQty = Number(itemQty) - 1;
-                                                                    if(itemTotalQty <2){
-                                                                        $(".tiMinus_<?php echo $items['rowid']; ?>").hide();
-                                                                    }                                                                    
-                                                                    var itemPrice = <?php echo $items['price']; ?>;
-                                                                    $(".item__price_<?php echo $items['rowid']; ?>").html(itemTotalQty + "x <span>৳ <?php echo $items['price']; ?></span>");
-                                                                    $(".price_quantity_<?php echo $items['rowid']; ?>").html("৳ " + (itemPrice * itemTotalQty));
-                                                                    $("#cartTotal").load(location.href + " #cartTotal");
-                                                                    $("#grandTotal").load(location.href + " #grandTotal");
-                                                                },
-                                                                error: function () {
-                                                                    alert('there is error while submit');
-                                                                }
-
-                                                            });
-                                                });
-
-                                            });
-
-                                            </script>
                                     <div class="item" id="item_div_<?php echo $items['rowid']; ?>">
                                         <div class="top u-flex">
 
-                                            <div class="item-close" id="item_del_<?php echo $items['rowid']; ?>"><i class="ti-close"></i></div>
+                                            <div data-closeitem="<?php echo $items['rowid']; ?>" class="item-close touhid_item_close" id="item_del_<?php echo $items['rowid']; ?>"><i class="ti-close"></i></div>
 
                                             <figure>
-                                                <?php if(isset($prodImg->img_name)){?>
-                                                <img class="lazyload" data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>" alt="">
+                                                <?php if (isset($prodImg->img_name)) { ?>
+                                                    <img class="lazyload" data-src="<?php echo base_url(); ?>resources/product-image/<?php echo $prodImg->img_name; ?>" alt="">
                                                 <?php } ?>
                                             </figure>
 
@@ -433,12 +327,14 @@ if (!empty($this->cart->contents())) {
 
                                             <div class="btn-set">
                                                 <div class="btn-set">
-                                                    <?php // if($items['qty'] > 1){ ?>
-                                                    <?php // } ?>
-                                                    <button class="tiMinus_<?php echo $items['rowid']; ?>"><i class="ti-minus ti_minus_<?php echo $items['rowid']?>"></i></button>
+                                                    <?php // if($items['qty'] > 1){ 
+                                                    ?>
+                                                    <?php // } 
+                                                    ?>
+                                                    <button class="touhid_minus" data-rowindex="<?php echo $items['rowid'] ?>" data-itemprice="<?php echo $items['price']; ?>"><i class="ti-minus"></i></button>
                                                     <input disabled="disabled" id='itemQty_<?php echo $items['rowid']; ?>' class="item__count" value="<?php echo $items['qty']; ?>">
-                                                    <input type="hidden" id='rowid_<?php echo $items['rowid']?>' value='<?php echo $items['rowid']?>'>
-                                                    <button><i class="ti-plus ti_plus_<?php echo $items['rowid']?>"></i></button>
+                                                    <input type="hidden" id='rowid_<?php echo $items['rowid'] ?>' value='<?php echo $items['rowid'] ?>'>
+                                                    <button class="touhid_plus" data-rowindex="<?php echo $items['rowid'] ?>" data-itemprice="<?php echo $items['price']; ?>"><i class="ti-plus"></i></button>
                                                 </div>
                                             </div>
 
@@ -447,13 +343,113 @@ if (!empty($this->cart->contents())) {
                                             </div>
                                         </div>
                                     </div> <!-- item -->
-        <?php
-    }
-}
-?>
+                            <?php
+                                }
+                            }
+                            ?>
                         </div>
-                        
-                       
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                            $('.touhid_plus').on('click', function() {
+                            var rowIndex = $(this).data('rowindex');
+                            var itemPrice = $(this).data('itemprice');
+                            //alert(itemPrice);
+
+                            var rowid = $("#rowid_" + rowIndex).val();
+                            var itemQty = $("#itemQty_" + rowIndex).val();
+                            var values = 'itemQty=' + itemQty;
+                            var url = '<?php echo base_url() ?>' + 'cart/cart_item_plus/' + rowIndex;
+                            //alert(url);
+                            $.ajax({
+                                url: url,
+                                type: "GET",
+                                data: values,
+                                cache: false,
+                                beforeSend: function() {},
+                                success: function(data) {
+                                    var itemTotalQty = Number(itemQty) + 1;
+
+                                    $(".item__price_" + rowIndex).html(itemTotalQty + "x <span>৳ " + itemPrice + "</span>");
+                                    $(".price_quantity_" + rowIndex).html("৳ " + (itemPrice * itemTotalQty));
+                                    $("#cartTotal").load(location.href + " #cartTotal");
+                                    $("#grandTotal").load(location.href + " #grandTotal");
+                                    $("#itemQty_" + rowIndex).val(itemTotalQty);
+                                },
+                                error: function() {
+                                    alert('there is error while submit');
+                                }
+
+                            });
+                            });
+                            $('.touhid_minus').on('click', function() {
+                            var rowIndex = $(this).data('rowindex');
+                            var itemPrice = $(this).data('itemprice');
+                            //alert(itemPrice);
+
+                            var rowid = $("#rowid_" + rowIndex).val();
+                            var itemQty = $("#itemQty_" + rowIndex).val();
+                            if (itemQty == 1) {
+                                alert('কমপক্ষে ১ টি ইউনিট নিতে হবে');
+                            } else {
+                                var values = 'itemQty=' + itemQty;
+                                var url = '<?php echo base_url() ?>' + 'cart/cart_item_plus/' + rowIndex;
+                                $.ajax({
+                                    url: url,
+                                    type: "GET",
+                                    data: values,
+                                    cache: false,
+                                    beforeSend: function() {},
+                                    success: function(data) {
+                                        var itemTotalQty = Number(itemQty) - 1;
+                                        $(".item__price_" + rowIndex).html(itemTotalQty + "x <span>৳ " + itemPrice + "</span>");
+                                        $(".price_quantity_" + rowIndex).html("৳ " + (itemPrice * itemTotalQty));
+                                        $("#cartTotal").load(location.href + " #cartTotal");
+                                        $("#grandTotal").load(location.href + " #grandTotal");
+                                        $("#itemQty_" + rowIndex).val(itemTotalQty);
+                                    },
+                                    error: function() {
+                                        alert('there is error while submit');
+                                    }
+
+                                });
+                            }
+
+                            //alert(url);
+
+                            });
+                            $('.touhid_item_close').on('click', function() {
+
+                            var rowid = $(this).data('closeitem');
+                            var values = 'rowid=' + rowid;
+                            var url = '<?php echo base_url() ?>' + 'cart/delect_cart_item/' + rowid;
+                            $.ajax({
+                                url: url,
+                                type: "GET",
+                                data: values,
+                                cache: false,
+                                beforeSend: function() {},
+                                success: function(data) {
+                                    $("#item_div_"+rowid).hide();
+                                    $("#cartDiv").load(location.href + " #cartDiv");
+                                    $("#cartTotal").load(location.href + " #cartTotal");
+                                    $("#grandTotal").load(location.href + " #grandTotal");
+                                    $(".cart-count").html(data);
+                                },
+                                error: function() {
+                                    alert('there is error while submit');
+                                }
+
+                            });
+
+                            });
+                            $("#itemQty_"+rowid).click(function(event) {
+                            /* stop form from submitting normally */
+                            alert("Oh! Something went to wrong.");
+                            });
+
+                            });
+                        </script>
+
 
                         <div class="cart-footer">
                             <div class="total-count u-flex u-flex--content-between u-flex--item-center">
@@ -465,20 +461,20 @@ if (!empty($this->cart->contents())) {
 
                                 <div>Delivery Charge</div>
                                 <div id="deliveryCharge"> ৳ <?php
-                                    if (isset($address->delivery_charge)) {
-                                        echo $address->delivery_charge;
-                                    } else {
-                                        echo 0;
-                                    }
-                                    ?>
+                                                            if (isset($address->delivery_charge)) {
+                                                                echo $address->delivery_charge;
+                                                            } else {
+                                                                echo 0;
+                                                            }
+                                                            ?>
                                 </div>
                             </div>
                             <div class="total-count u-flex u-flex--content-between u-flex--item-center">
                                 <div>Grand Total</div>
 
-                                <div id="grandTotal"> ৳ <?php                                    
-                                    echo $this->cart->total() + $delivery_charge;
-                                    ?>
+                                <div id="grandTotal"> ৳ <?php
+                                                        echo $this->cart->total() + $delivery_charge;
+                                                        ?>
                                 </div>
                             </div>
                             <div class="act">

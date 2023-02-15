@@ -1,0 +1,103 @@
+<script type="text/javascript">
+                                        $(document).ready(function() {
+                                            /* attach a submit handler to the form */
+                                            $("#item_del_<?php echo $items['rowid']; ?>").click(function(event) {
+                                                /* stop form from submitting normally */
+                                                var rowid = '<?php echo $items['rowid']; ?>';
+                                                var values = 'rowid=' + rowid;
+                                                $.ajax({
+                                                    url: "<?php echo base_url() ?>cart/delect_cart_item/<?php echo $items['rowid']; ?>",
+                                                    type: "GET",
+                                                    data: values,
+                                                    cache: false,
+                                                    beforeSend: function() {},
+                                                    success: function(data) {
+                                                        $("#item_div_<?php echo $items['rowid']; ?>").hide();
+                                                        $("#cartDiv").load(location.href + " #cartDiv");
+                                                        $("#cartTotal").load(location.href + " #cartTotal");
+                                                        $("#grandTotal").load(location.href + " #grandTotal");
+                                                        //                                                                    $("#grandTotal").html(<?php // echo $this->cart->total() + $delivery_charge; 
+                                                                                                                                                    ?>);
+                                                        $(".cart-count").html(data);
+                                                    },
+                                                    error: function() {
+                                                        alert('there is error while submit');
+                                                    }
+
+                                                });
+
+                                            });
+                                            $("#itemQty_<?php echo $items['rowid']; ?>").click(function(event) {
+                                                /* stop form from submitting normally */
+                                                alert("Oh! Something went to wrong.");
+                                            });
+
+                                        });
+                                    </script>
+
+                                    <script type="text/javascript">
+                                        $(document).ready(function() {
+                                            /* attach a submit handler to the form */
+                                            $(".ti_plus_<?php echo $items['rowid'] ?>").click(function(event) {
+                                                var rowid = $("#rowid_<?php echo $items['rowid'] ?>").val();
+                                                var itemQty = $("#itemQty_<?php echo $items['rowid']; ?>").val();
+                                                var values = 'itemQty=' + itemQty;
+
+                                                $.ajax({
+                                                    url: "<?php echo base_url() ?>cart/cart_item_plus/<?php echo $items['rowid']; ?>",
+                                                    type: "GET",
+                                                    data: values,
+                                                    cache: false,
+                                                    beforeSend: function() {},
+                                                    success: function(data) {
+                                                        var itemTotalQty = Number(itemQty) + 1;
+                                                        var itemPrice = <?php echo $items['price']; ?>;
+                                                        $(".item__price_<?php echo $items['rowid']; ?>").html(itemTotalQty + "x <span>৳ <?php echo $items['price']; ?></span>");
+                                                        $(".price_quantity_<?php echo $items['rowid']; ?>").html("৳ " + (itemPrice * itemTotalQty));
+                                                        $("#cartTotal").load(location.href + " #cartTotal");
+                                                        $("#grandTotal").load(location.href + " #grandTotal");
+                                                        $("#itemQty_<?php echo $items['rowid']; ?>").val(itemTotalQty);
+                                                    },
+                                                    error: function() {
+                                                        alert('there is error while submit');
+                                                    }
+
+                                                });
+                                            });
+
+                                        });
+                                    </script>
+                                    <script type="text/javascript">
+                                        $(document).ready(function() {
+                                            /* attach a submit handler to the form */
+                                            $(".ti_minus_<?php echo $items['rowid'] ?>").click(function(event) {
+                                                var rowid = $("#rowid_<?php echo $items['rowid'] ?>").val();
+                                                var itemQty = $("#itemQty_<?php echo $items['rowid']; ?>").val();
+                                                var values = 'itemQty=' + itemQty;
+
+                                                $.ajax({
+                                                    url: "<?php echo base_url() ?>cart/cart_item_minus/<?php echo $items['rowid']; ?>",
+                                                    type: "GET",
+                                                    data: values,
+                                                    cache: false,
+                                                    beforeSend: function() {},
+                                                    success: function(data) {
+                                                        var itemTotalQty = Number(itemQty) - 1;
+                                                        if (itemTotalQty < 2) {
+                                                            $(".tiMinus_<?php echo $items['rowid']; ?>").hide();
+                                                        }
+                                                        var itemPrice = <?php echo $items['price']; ?>;
+                                                        $(".item__price_<?php echo $items['rowid']; ?>").html(itemTotalQty + "x <span>৳ <?php echo $items['price']; ?></span>");
+                                                        $(".price_quantity_<?php echo $items['rowid']; ?>").html("৳ " + (itemPrice * itemTotalQty));
+                                                        $("#cartTotal").load(location.href + " #cartTotal");
+                                                        $("#grandTotal").load(location.href + " #grandTotal");
+                                                    },
+                                                    error: function() {
+                                                        alert('there is error while submit');
+                                                    }
+
+                                                });
+                                            });
+
+                                        });
+                                    </script>

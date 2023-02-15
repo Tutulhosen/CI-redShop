@@ -3,24 +3,24 @@ $(document).ready(function(){
 
 
 
-    $(document).on("click",".price-calc .btn-set button", function(){
+    // $(document).on("click",".price-calc .btn-set button", function(){
 
-        let self = $(this);
+    //     let self = $(this);
 
-        if(self.find('i').hasClass('ti-minus')){
-            let presentCount = $(".item__count").attr('value');
-            if(presentCount>0){
-                self.parent().find('.item__count').attr('value',parseInt(presentCount)-1);
-            }
+    //     if(self.find('i').hasClass('ti-minus')){
+    //         let presentCount = $(".item__count").attr('value');
+    //         if(presentCount>0){
+    //             self.parent().find('.item__count').attr('value',parseInt(presentCount)-1);
+    //         }
             
-        } 
+    //     } 
 
-        else if(self.find('i').hasClass('ti-plus')){
-            let presentCount = $(".item__count").attr('value');
-            self.parent().find('.item__count').attr('value',parseInt(presentCount)+1)
-        }
+    //     else if(self.find('i').hasClass('ti-plus')){
+    //         let presentCount = $(".item__count").attr('value');
+    //         self.parent().find('.item__count').attr('value',parseInt(presentCount)+1)
+    //     }
 
-    })
+    // })
 
 
 
