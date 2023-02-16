@@ -47,8 +47,14 @@ if (isset($address->delivery_charge)) {
                     <div class="title u-flex u-flex--item-center">
                         <p>
                             <b>যেভাবে আপনি পন্য কিনবেনঃ</b><br>
-                            ১। আপনি যদি আমাদের নতুন অতিথি হয়ে থাকেন তাহলে যেকোন পণ্য কিনতে এখনই Sing up (সাইন-আপ/রেজিস্ট্রেশন করুন)। আপনার নাম্বারটি সঠিক কিনা যাচাই কারার জন্য একটি কোড যাবে, সেটি দিন। <br>
+                            ১। আপনি যদি আমাদের নতুন অতিথি হয়ে থাকেন তাহলে যেকোন পণ্য কিনতে এখনই Sing up (সাইন-আপ/রেজিস্ট্রেশন করুন)। আপনার নাম্বারটি সঠিক কিনা যাচাই কারার জন্য একটি কোড যাবে, সেটি দিন। 
+                            <br>
+                                <?php if (!empty($minimum_amt_free_delevary->option_value)) {
+                                ?><b>মোট Order Amount <?= $minimum_amt_free_delevary->option_value ?> টাকার বেশি হলে Delivery Charge ফ্রী !! সেক্ষেত্রে Delivery Details থেকে Delivery Charge, Delivery Address ভাল ভাবে মিলিয়ে নিন  </b><?php
+                                                                                                            } ?>
+                            <br>
                         </p>
+                           
                     </div>
                     <div class="title u-flex u-flex--item-center" style="display:none">
                         <p>
@@ -191,37 +197,58 @@ if (isset($address->delivery_charge)) {
                                                                                                         ?>" id="dis" required="">
 
                                     </div>
+                                    <div id="delivery_charge_free_or_not">
+                                        <?php
 
-                                    <div class="form-group u-m-b-25">
+                                        if (!empty($minimum_amt_free_delevary->option_value)) {
+                                            if ($minimum_amt_free_delevary->option_value > $this->cart->total()) {
+                                                $inside_dhaka_charge = 50;
+                                                $outside_dhaka_charge = 100;
+                                            } else {
+                                                $inside_dhaka_charge = 0;
+                                                $outside_dhaka_charge = 0;
+                                            }
+                                        } else {
+                                            $inside_dhaka_charge = 50;
+                                            $outside_dhaka_charge = 100;
+                                        }
+                                        ?>
+                                        <div class="form-group u-m-b-25">
 
-                                        <label for="t12">Delivery Charge <span class="mendatory"></span></label>
+                                            <label for="t12">Delivery Charge <span class="mendatory"></span></label>
+                                            <?php if (!empty($minimum_amt_free_delevary->option_value)) {
+                                            ?><h6>মোট Order Amount <?= $minimum_amt_free_delevary->option_value ?> টাকার বেশি হলে Delivery Charge ফ্রী !! </h6><?php
+                                                                                                                                                } ?>
 
-                                        <div class="radio">
+                                            <div class="radio">
 
-                                            <label><input type="radio" name="delivery_charge" value="50" <?php
-                                                                                                            if (isset($address->delivery_charge) && $address->delivery_charge == '50') {
-                                                                                                                echo "checked";
-                                                                                                            } else {
-                                                                                                                echo "checked";
-                                                                                                            }
-                                                                                                            ?>> Inside Dhaka: ৳50</label>
+                                                <label><input type="radio" required name="delivery_charge" value="<?= $inside_dhaka_charge ?>" <?php
+                                                                                                                                                if (isset($address->delivery_charge) && $address->delivery_charge == $inside_dhaka_charge) {
+                                                                                                                                                    echo "checked";
+                                                                                                                                                }
+                                                                                                                                                ?>> Inside Dhaka: ৳<?= $inside_dhaka_charge ?></label>
 
+                                            </div>
+
+                                            <div class="radio">
+
+                                                <label><input type="radio" required name="delivery_charge" value="100" <?php
+                                                                                                                        if (isset($address->delivery_charge) && $address->delivery_charge == $outside_dhaka_charge) {
+                                                                                                                            echo "checked";
+                                                                                                                        }
+                                                                                                                        ?>> Outside Dhaka: ৳<?= $outside_dhaka_charge ?></label>
+
+                                            </div>
                                         </div>
 
-                                        <div class="radio">
-
-                                            <label><input type="radio" name="delivery_charge" value="100" <?php
-                                                                                                            if (isset($address->delivery_charge) && $address->delivery_charge == '100') {
-                                                                                                                echo "checked";
-                                                                                                            }
-                                                                                                            ?>> Outside Dhaka: ৳100</label>
-
-                                        </div>
                                     </div>
+
+
                                     <div class="form-submit u-m-t-20 text-center">
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     <?php } ?>
@@ -364,10 +391,10 @@ if (isset($address->delivery_charge)) {
                                     var rowid = $("#rowid_" + rowIndex).val();
                                     var itemQty = $("#itemQty_" + rowIndex).val();
                                     // alert(itemQty);
-                                    var max_qty_single_order=$('#max_qty_single_order_' + rowIndex).val();
+                                    var max_qty_single_order = $('#max_qty_single_order_' + rowIndex).val();
                                     // alert(max_qty_single_order);
-                                    if ( (parseInt(itemQty) >= parseInt(max_qty_single_order)) && (parseInt(max_qty_single_order) != 0)) {
-                                            alert('এই প্রোডাক্টটি '+max_qty_single_order+' এর বেশি এক অর্ডারে বিক্রি করা হয় না ধন্যবাদ')
+                                    if ((parseInt(itemQty) >= parseInt(max_qty_single_order)) && (parseInt(max_qty_single_order) != 0)) {
+                                        alert('এই প্রোডাক্টটি ' + max_qty_single_order + ' এর বেশি এক অর্ডারে বিক্রি করা হয় না ধন্যবাদ')
                                     } else {
                                         var values = 'itemQty=' + itemQty;
                                         var url = '<?php echo base_url() ?>' + 'cart/cart_item_plus/' + rowIndex;
@@ -386,6 +413,7 @@ if (isset($address->delivery_charge)) {
                                                 $("#cartTotal").load(location.href + " #cartTotal");
                                                 $("#grandTotal").load(location.href + " #grandTotal");
                                                 $("#itemQty_" + rowIndex).val(itemTotalQty);
+                                                $("#delivery_charge_free_or_not").load(location.href + " #delivery_charge_free_or_not");
                                             },
                                             error: function() {
                                                 alert('there is error while submit');
@@ -420,6 +448,7 @@ if (isset($address->delivery_charge)) {
                                                 $("#cartTotal").load(location.href + " #cartTotal");
                                                 $("#grandTotal").load(location.href + " #grandTotal");
                                                 $("#itemQty_" + rowIndex).val(itemTotalQty);
+                                                $("#delivery_charge_free_or_not").load(location.href + " #delivery_charge_free_or_not");
                                             },
                                             error: function() {
                                                 alert('there is error while submit');
@@ -448,6 +477,7 @@ if (isset($address->delivery_charge)) {
                                             $("#cartTotal").load(location.href + " #cartTotal");
                                             $("#grandTotal").load(location.href + " #grandTotal");
                                             $(".cart-count").html(data);
+                                            $("#delivery_charge_free_or_not").load(location.href + " #delivery_charge_free_or_not");
                                         },
                                         error: function() {
                                             alert('there is error while submit');
@@ -474,6 +504,7 @@ if (isset($address->delivery_charge)) {
                             <div class="total-count u-flex u-flex--content-between u-flex--item-center">
 
                                 <div>Delivery Charge</div>
+
                                 <div id="deliveryCharge"> ৳ <?php
                                                             if (isset($address->delivery_charge)) {
                                                                 echo $address->delivery_charge;

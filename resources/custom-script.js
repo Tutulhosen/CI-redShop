@@ -43,7 +43,7 @@
         event.preventDefault();
         var values = $("#add-to-cart").serialize();
         values = values + "&button=" + buttonpressed;
-        console.log(values);
+        //console.log(values);
         $.ajax({
             url: base_url + "cart/add_to_cart",
             type: "POST",
@@ -56,6 +56,10 @@
                 if(buttonpressed == 'buyNow'){
                     window.location.href = base_url + "products/cart_details";
                 }
+                var product_name=$('.product-act input[name="name"]').val(); 
+                
+                alert(product_name+' প্রোডাক্টটি আপনার cart এ যোগ হয়েছে , উপরে ডান দিকে দেখুন');
+
                 $('.ajax_loader').hide();
                 $('.cart-count').html(data);
                 $(".cartDiv").load(location.href + " #cartDiv");

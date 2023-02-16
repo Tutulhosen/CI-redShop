@@ -96,7 +96,17 @@ class Products extends CI_Controller {
         $title = 'home';
         $data['title'] = $title;
         $data['menu'] = 'home';
-        $data['category'] = $this->products_model->getAllCategory();
+
+        // $data['category'] = $this->products_model->getAllCategory();
+        $data['minimum_amt_free_delevary'] = $this->db
+            ->select('option_value')
+            ->where('option_name','minimum_amt_free_delevary')
+            ->get('redshop_options')
+            ->row();
+
+        //  var_dump($data['minimum_amt_free_delevary']);
+        //  exit; 
+
         if ($this->session->userdata('user_id')) {
             $user_id = $this->session->userdata('user_id');
             $data['result'] = $this->db->select('*')->where('id', $user_id)->get('user_info')->row();
