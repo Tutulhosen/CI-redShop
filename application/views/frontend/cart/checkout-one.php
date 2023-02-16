@@ -232,13 +232,27 @@ if (isset($address->delivery_charge)) {
 
                                             <div class="radio">
 
-                                                <label><input type="radio" required name="delivery_charge" value="100" <?php
+                                                <label><input type="radio" required name="delivery_charge" value="<?= $outside_dhaka_charge ?>" <?php
                                                                                                                         if (isset($address->delivery_charge) && $address->delivery_charge == $outside_dhaka_charge) {
                                                                                                                             echo "checked";
                                                                                                                         }
                                                                                                                         ?>> Outside Dhaka: ৳<?= $outside_dhaka_charge ?></label>
 
                                             </div>
+                                            <?php
+                                             
+                                             if ($inside_dhaka_charge  == 0 || $outside_dhaka_charge == 0 ) {
+                                                 ?>
+                                                 <div class="radio">
+
+<label><input type="radio" required name="delivery_charge" value="0" checked> All over Bangladesh: ৳0</label>
+
+</div>
+                                                 <?php
+                                             }
+                                                                                                                       
+                                            ?>
+                                            
                                         </div>
 
                                     </div>
