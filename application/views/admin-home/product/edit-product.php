@@ -142,7 +142,11 @@
                                 <div class="form-group">
                                     <label>Qty</label>                                    
                                     <input type="text" class="form-control" name="qty" value="<?php echo $result->qty; ?>"  >
-                                </div>  
+                                </div> 
+                                <div class="form-group">
+                                    <label>Maximum Qty in Single Order</label>                                    
+                                    <input type="text" class="form-control" name="max_qty_single_order" value="<?php echo $result->max_qty_single_order; ?>"  >
+                                </div> 
                                 <div class="form-group">
                                     <label>Price</label>                                    
                                     <input type="text" class="form-control" name="price" value="<?php echo $result->price; ?>"  >

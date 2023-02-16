@@ -100,6 +100,7 @@ class Products extends CI_Controller {
         $data['size'] = trim($this->input->post('size'));
         $data['color'] = trim($this->input->post('color'));
         $data['qty'] = trim($this->input->post('qty'));
+        $data['max_qty_single_order'] = trim($this->input->post('max_qty_single_order'));
         $data['price'] = trim($this->input->post('price'));
         $data['discount'] = trim($this->input->post('discount'));
         $data['currency'] = trim($this->input->post('currency'));
@@ -220,6 +221,7 @@ class Products extends CI_Controller {
         $data['size'] = trim($this->input->post('size'));
         $data['color'] = trim($this->input->post('color'));
         $data['qty'] = trim($this->input->post('qty'));
+        $data['max_qty_single_order'] = trim($this->input->post('max_qty_single_order'));
         $data['price'] = trim($this->input->post('price'));
         $data['discount'] = trim($this->input->post('discount'));
         $data['currency'] = trim($this->input->post('currency'));

@@ -108,7 +108,15 @@
                                 </li>
                             </ul>
                         </li>
-                                       
+                        <li class="<?php if($menu=='Options'){echo 'active'; }?>">
+                            <a href="<?php echo base_url(); ?>admin/options"><i class="fa fa-files-o fa-fw"></i> Options<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level <?php if($menu=='Options'){echo 'collapse in'; }else{ echo 'collapse'; }?> ">
+                                <li>                                                           
+                                    <a href="<?php echo base_url(); ?>admin/options">Options</a>                               
+                                                                     
+                                </li>
+                            </ul>
+                        </li>               
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

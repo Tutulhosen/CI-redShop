@@ -298,6 +298,11 @@ if (isset($address->delivery_charge)) {
                             if (!empty($this->cart->contents())) {
                                 foreach ($this->cart->contents() as $items) {
                                     $prodImg = $this->db->select('*')->where('product_id', $items['id'])->get('product_img')->row();
+                                    $max_qty_single_order = 0;
+                                    $max_qty_single = $this->db->select('max_qty_single_order')->where('id', $items['id'])->get('products')->row();
+                                    if (!empty($max_qty_single->max_qty_single_order)) {
+                                        $max_qty_single_order = $max_qty_single->max_qty_single_order;
+                                    }
                                     //        echo "<pre>";
                                     //        print_r($prodImg);
                                     //        die();
@@ -327,13 +332,14 @@ if (isset($address->delivery_charge)) {
 
                                             <div class="btn-set">
                                                 <div class="btn-set">
-                                                    <?php // if($items['qty'] > 1){ 
+                                                    <?php // if($items['qty'] > 1){  max_qty_single_order
                                                     ?>
                                                     <?php // } 
                                                     ?>
                                                     <button class="touhid_minus" data-rowindex="<?php echo $items['rowid'] ?>" data-itemprice="<?php echo $items['price']; ?>"><i class="ti-minus"></i></button>
                                                     <input disabled="disabled" id='itemQty_<?php echo $items['rowid']; ?>' class="item__count" value="<?php echo $items['qty']; ?>">
                                                     <input type="hidden" id='rowid_<?php echo $items['rowid'] ?>' value='<?php echo $items['rowid'] ?>'>
+                                                    <input type="hidden" id='max_qty_single_order_<?php echo $items['rowid'] ?>' value='<?php echo $max_qty_single_order ?>'>
                                                     <button class="touhid_plus" data-rowindex="<?php echo $items['rowid'] ?>" data-itemprice="<?php echo $items['price']; ?>"><i class="ti-plus"></i></button>
                                                 </div>
                                             </div>
@@ -350,102 +356,110 @@ if (isset($address->delivery_charge)) {
                         </div>
                         <script type="text/javascript">
                             $(document).ready(function() {
-                            $('.touhid_plus').on('click', function() {
-                            var rowIndex = $(this).data('rowindex');
-                            var itemPrice = $(this).data('itemprice');
-                            //alert(itemPrice);
+                                $('.touhid_plus').on('click', function() {
+                                    var rowIndex = $(this).data('rowindex');
+                                    var itemPrice = $(this).data('itemprice');
+                                    //alert(itemPrice);
 
-                            var rowid = $("#rowid_" + rowIndex).val();
-                            var itemQty = $("#itemQty_" + rowIndex).val();
-                            var values = 'itemQty=' + itemQty;
-                            var url = '<?php echo base_url() ?>' + 'cart/cart_item_plus/' + rowIndex;
-                            //alert(url);
-                            $.ajax({
-                                url: url,
-                                type: "GET",
-                                data: values,
-                                cache: false,
-                                beforeSend: function() {},
-                                success: function(data) {
-                                    var itemTotalQty = Number(itemQty) + 1;
+                                    var rowid = $("#rowid_" + rowIndex).val();
+                                    var itemQty = $("#itemQty_" + rowIndex).val();
+                                    // alert(itemQty);
+                                    var max_qty_single_order=$('#max_qty_single_order_' + rowIndex).val();
+                                    // alert(max_qty_single_order);
+                                    if ( (parseInt(itemQty) >= parseInt(max_qty_single_order)) && (parseInt(max_qty_single_order) != 0)) {
+                                            alert('এই প্রোডাক্টটি '+max_qty_single_order+' এর বেশি এক অর্ডারে বিক্রি করা হয় না ধন্যবাদ')
+                                    } else {
+                                        var values = 'itemQty=' + itemQty;
+                                        var url = '<?php echo base_url() ?>' + 'cart/cart_item_plus/' + rowIndex;
+                                        //alert(url);
+                                        $.ajax({
+                                            url: url,
+                                            type: "GET",
+                                            data: values,
+                                            cache: false,
+                                            beforeSend: function() {},
+                                            success: function(data) {
+                                                var itemTotalQty = Number(itemQty) + 1;
 
-                                    $(".item__price_" + rowIndex).html(itemTotalQty + "x <span>৳ " + itemPrice + "</span>");
-                                    $(".price_quantity_" + rowIndex).html("৳ " + (itemPrice * itemTotalQty));
-                                    $("#cartTotal").load(location.href + " #cartTotal");
-                                    $("#grandTotal").load(location.href + " #grandTotal");
-                                    $("#itemQty_" + rowIndex).val(itemTotalQty);
-                                },
-                                error: function() {
-                                    alert('there is error while submit');
-                                }
+                                                $(".item__price_" + rowIndex).html(itemTotalQty + "x <span>৳ " + itemPrice + "</span>");
+                                                $(".price_quantity_" + rowIndex).html("৳ " + (itemPrice * itemTotalQty));
+                                                $("#cartTotal").load(location.href + " #cartTotal");
+                                                $("#grandTotal").load(location.href + " #grandTotal");
+                                                $("#itemQty_" + rowIndex).val(itemTotalQty);
+                                            },
+                                            error: function() {
+                                                alert('there is error while submit');
+                                            }
 
-                            });
-                            });
-                            $('.touhid_minus').on('click', function() {
-                            var rowIndex = $(this).data('rowindex');
-                            var itemPrice = $(this).data('itemprice');
-                            //alert(itemPrice);
-
-                            var rowid = $("#rowid_" + rowIndex).val();
-                            var itemQty = $("#itemQty_" + rowIndex).val();
-                            if (itemQty == 1) {
-                                alert('কমপক্ষে ১ টি ইউনিট নিতে হবে');
-                            } else {
-                                var values = 'itemQty=' + itemQty;
-                                var url = '<?php echo base_url() ?>' + 'cart/cart_item_plus/' + rowIndex;
-                                $.ajax({
-                                    url: url,
-                                    type: "GET",
-                                    data: values,
-                                    cache: false,
-                                    beforeSend: function() {},
-                                    success: function(data) {
-                                        var itemTotalQty = Number(itemQty) - 1;
-                                        $(".item__price_" + rowIndex).html(itemTotalQty + "x <span>৳ " + itemPrice + "</span>");
-                                        $(".price_quantity_" + rowIndex).html("৳ " + (itemPrice * itemTotalQty));
-                                        $("#cartTotal").load(location.href + " #cartTotal");
-                                        $("#grandTotal").load(location.href + " #grandTotal");
-                                        $("#itemQty_" + rowIndex).val(itemTotalQty);
-                                    },
-                                    error: function() {
-                                        alert('there is error while submit');
+                                        });
                                     }
 
                                 });
-                            }
+                                $('.touhid_minus').on('click', function() {
+                                    var rowIndex = $(this).data('rowindex');
+                                    var itemPrice = $(this).data('itemprice');
+                                    //alert(itemPrice);
 
-                            //alert(url);
+                                    var rowid = $("#rowid_" + rowIndex).val();
+                                    var itemQty = $("#itemQty_" + rowIndex).val();
+                                    if (itemQty == 1) {
+                                        alert('কমপক্ষে ১ টি ইউনিট নিতে হবে');
+                                    } else {
+                                        var values = 'itemQty=' + itemQty;
+                                        var url = '<?php echo base_url() ?>' + 'cart/cart_item_minus/' + rowIndex;
+                                        $.ajax({
+                                            url: url,
+                                            type: "GET",
+                                            data: values,
+                                            cache: false,
+                                            beforeSend: function() {},
+                                            success: function(data) {
+                                                var itemTotalQty = Number(itemQty) - 1;
+                                                $(".item__price_" + rowIndex).html(itemTotalQty + "x <span>৳ " + itemPrice + "</span>");
+                                                $(".price_quantity_" + rowIndex).html("৳ " + (itemPrice * itemTotalQty));
+                                                $("#cartTotal").load(location.href + " #cartTotal");
+                                                $("#grandTotal").load(location.href + " #grandTotal");
+                                                $("#itemQty_" + rowIndex).val(itemTotalQty);
+                                            },
+                                            error: function() {
+                                                alert('there is error while submit');
+                                            }
 
-                            });
-                            $('.touhid_item_close').on('click', function() {
+                                        });
+                                    }
 
-                            var rowid = $(this).data('closeitem');
-                            var values = 'rowid=' + rowid;
-                            var url = '<?php echo base_url() ?>' + 'cart/delect_cart_item/' + rowid;
-                            $.ajax({
-                                url: url,
-                                type: "GET",
-                                data: values,
-                                cache: false,
-                                beforeSend: function() {},
-                                success: function(data) {
-                                    $("#item_div_"+rowid).hide();
-                                    $("#cartDiv").load(location.href + " #cartDiv");
-                                    $("#cartTotal").load(location.href + " #cartTotal");
-                                    $("#grandTotal").load(location.href + " #grandTotal");
-                                    $(".cart-count").html(data);
-                                },
-                                error: function() {
-                                    alert('there is error while submit');
-                                }
+                                    //alert(url);
 
-                            });
+                                });
+                                $('.touhid_item_close').on('click', function() {
 
-                            });
-                            $("#itemQty_"+rowid).click(function(event) {
-                            /* stop form from submitting normally */
-                            alert("Oh! Something went to wrong.");
-                            });
+                                    var rowid = $(this).data('closeitem');
+                                    var values = 'rowid=' + rowid;
+                                    var url = '<?php echo base_url() ?>' + 'cart/delect_cart_item/' + rowid;
+                                    $.ajax({
+                                        url: url,
+                                        type: "GET",
+                                        data: values,
+                                        cache: false,
+                                        beforeSend: function() {},
+                                        success: function(data) {
+                                            $("#item_div_" + rowid).hide();
+                                            $("#cartDiv").load(location.href + " #cartDiv");
+                                            $("#cartTotal").load(location.href + " #cartTotal");
+                                            $("#grandTotal").load(location.href + " #grandTotal");
+                                            $(".cart-count").html(data);
+                                        },
+                                        error: function() {
+                                            alert('there is error while submit');
+                                        }
+
+                                    });
+
+                                });
+                                // $("#itemQty_" + rowid).click(function(event) {
+                                //     /* stop form from submitting normally */
+                                //     alert("Oh! Something went to wrong.");
+                                // });
 
                             });
                         </script>
