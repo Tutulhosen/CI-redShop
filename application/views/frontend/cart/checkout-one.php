@@ -121,7 +121,7 @@ if (isset($address->delivery_charge)) {
 
                             <div class="delivery-det">
 
-                                <form action="<?php echo base_url(); ?>checkout/delivery_address" method="post">
+                                <form action="<?php echo base_url(); ?>checkout/delivery_address" method="post" id="address_form">
 
                                     <div class="form-group u-m-b-25">
 
@@ -222,7 +222,7 @@ if (isset($address->delivery_charge)) {
 
                                             <div class="radio">
 
-                                                <label><input type="radio" required name="delivery_charge" value="<?= $inside_dhaka_charge ?>" <?php
+                                                <label><input type="radio" class="delivery_charge" required name="delivery_charge" value="<?= $inside_dhaka_charge ?>" <?php
                                                                                                                                                 if (isset($address->delivery_charge) && $address->delivery_charge == $inside_dhaka_charge) {
                                                                                                                                                     echo "checked";
                                                                                                                                                 }
@@ -232,7 +232,7 @@ if (isset($address->delivery_charge)) {
 
                                             <div class="radio">
 
-                                                <label><input type="radio" required name="delivery_charge" value="<?= $outside_dhaka_charge ?>" <?php
+                                                <label><input type="radio" class="delivery_charge" required name="delivery_charge" value="<?= $outside_dhaka_charge ?>" <?php
                                                                                                                         if (isset($address->delivery_charge) && $address->delivery_charge == $outside_dhaka_charge) {
                                                                                                                             echo "checked";
                                                                                                                         }
@@ -245,7 +245,7 @@ if (isset($address->delivery_charge)) {
                                                  ?>
                                                  <div class="radio">
 
-<label><input type="radio" required name="delivery_charge" value="0" checked> All over Bangladesh: ৳0</label>
+<label><input type="radio" class="delivery_charge" required name="delivery_charge" value="0" checked> All over Bangladesh: ৳0</label>
 
 </div>
                                                  <?php
@@ -280,7 +280,7 @@ if (isset($address->delivery_charge)) {
                     <?php if (isset($address->delivery_charge)) { ?>
                         <div class="step-body" <?php if (isset($address->delivery_charge)) { ?> style="display: block;" <?php } ?>>
                             <div class="delivery-det">
-                                <form action="<?php echo base_url(); ?>checkout/proceed_to_checkout" method="post">
+                                <form action="<?php echo base_url(); ?>checkout/proceed_to_checkout" method="post" id="proceed_to_checkout">
                                     <div class="checkbox">
                                         <label><input type="checkbox" value="" checked=""> Cash on delivery</label>
 
@@ -316,7 +316,7 @@ if (isset($address->delivery_charge)) {
                                         </div>
                                     </div>
                                     <div class="form-submit u-m-t-20 text-center">
-                                        <button type="submit" class="btn btn-success">Checkout</button>
+                                        <button type="button" class="btn btn-success checkout_btn_submit">Checkout</button>
                                     </div>
                                 </form>
                             </div>
@@ -504,8 +504,26 @@ if (isset($address->delivery_charge)) {
                                 //     /* stop form from submitting normally */
                                 //     alert("Oh! Something went to wrong.");
                                 // });
-
+                                  $('.checkout_btn_submit').on('click',function(e){
+                                     e.preventDefault();
+                                    
+                                     if($('.delivery_charge').is(':checked')) 
+                                     { 
+                                        
+                                        $('#proceed_to_checkout').submit();
+                                    }
+                                    else
+                                    {
+                                        alert("Delivery Details থেকে সব গুলো options ভাল্ভাবে check করুন "); 
+                                    }
+                                    $('.delivery_charge').on('click',function(){
+                                        $('#address_form').submit();
+                                    })
+                                    //address_form
+                                    //proceed_to_checkout
+                                  })
                             });
+                            
                         </script>
 
 
